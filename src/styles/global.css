@@ -1,1 +1,15 @@
 @import "tailwindcss";
+@import "@fontsource-variable/jetbrains-mono";
+
+@theme {
+  /* palette */
+  --color-paper: #EBE8E2;
+  --color-ink: #1B1B1B;
+  --color-soft: #3A3833;
+  --color-muted: #6B6862;
+  --color-line: #C9C5BB;
+  --color-accent: #B3431E;
+
+  /* typo */
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+}

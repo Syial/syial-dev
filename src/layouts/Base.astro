@@ -1,0 +1,45 @@
+---
+import "../styles/global.css";
+const { title = "Syial" } = Astro.props;
+
+const nav = [
+  { href: "/#intro", label: "Intro" },
+  { href: "/#a-propos", label: "À propos" },
+  { href: "/#projets", label: "Projets" },
+  { href: "/#writeups", label: "Write-ups" },
+  { href: "/#contact", label: "Contact" },
+];
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content="Syial — étudiant en cybersécurité, futur analyste blue team. Projets, write-ups et parcours." />
+  </head>
+  <body class="bg-paper text-ink font-mono antialiased">
+    <header class="border-b border-line">
+      <div class="mx-auto max-w-4xl px-6 py-4 flex items-center justify-between">
+        <a href="/" class="text-sm font-medium tracking-widest uppercase">Syial</a>
+        <nav class="flex gap-5 text-xs tracking-wider uppercase text-muted">
+          {nav.map((item) => (
+            <a href={item.href} class="hover:text-ink transition-colors">{item.label}</a>
+          ))}
+        </nav>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-4xl px-6">
+      <slot />
+    </main>
+
+    <footer class="border-t border-line mt-24">
+      <div class="mx-auto max-w-4xl px-6 py-5 flex justify-between text-xs text-muted">
+        <span>© 2026 Syial</span>
+        <span>Present day, present time.</span>
+      </div>
+    </footer>
+  </body>
+</html>
