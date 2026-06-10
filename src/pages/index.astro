@@ -1,12 +1,31 @@
 ---
 import Base from "../layouts/Base.astro";
+import Section from "../components/Section.astro";
 ---
 
 <Base>
-  <section id="intro" class="py-20">
-    <h1 class="text-4xl font-medium">Futur analyste blue team <span class="text-accent">*</span></h1>
-    <p class="mt-6 text-sm text-soft max-w-md leading-relaxed">
-      Contenu à venir, section par section.
+  <Section id="intro" number="01" title="Intro">
+    <h1 slot="heading" class="text-3xl md:text-4xl font-medium leading-tight">
+      Futur analyste blue team <span class="text-accent">*</span>
+    </h1>
+    <p class="text-sm text-soft max-w-md leading-relaxed">
+      J'apprends par la pratique. Mods de jeu, scripts, petits outils : ma façon de comprendre un système, c'est de mettre le nez dedans pour voir comment il tourne. C'est ce qui m'a mené vers la cybersécurité défensive, où ce réflexe devient un métier. Ce site documente mon parcours.
     </p>
-  </section>
+  </Section>
+
+  <Section id="a-propos" number="02" title="À propos">
+    <p class="text-sm text-soft max-w-md leading-relaxed">Contenu à venir.</p>
+  </Section>
+
+  <Section id="projets" number="03" title="Projets">
+    <p class="text-sm text-soft max-w-md leading-relaxed">Cartes projets à venir.</p>
+  </Section>
+
+  <Section id="writeups" number="04" title="Write-ups">
+    <p class="text-sm text-soft max-w-md leading-relaxed">Liste à venir.</p>
+  </Section>
+
+  <Section id="contact" number="05" title="Contact">
+    <p class="text-sm text-soft max-w-md leading-relaxed">Coordonnées à venir.</p>
+  </Section>
 </Base>
