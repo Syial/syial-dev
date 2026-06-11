@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import Section from "../components/Section.astro";
+import ProjectCard from "../components/ProjectCard.astro";
 ---
 
 <Base>
@@ -11,7 +12,7 @@ import Section from "../components/Section.astro";
     <p class="text-sm text-soft max-w-md leading-relaxed">
       J'apprends par la pratique. Mods de jeu, scripts, petits outils : ma façon de comprendre un système, c'est de mettre le nez dedans pour voir comment il fonctionne. C'est ce qui m'a mené vers la cybersécurité défensive, où ce réflexe devient un métier. Ce site documente mon parcours.
     </p>
-    <div class="mt-8 border border-line max-w-md p-4">
+    <div class="mt-8 border border-line bg-card max-w-md p-4">
     <div class="text-[10px] tracking-widest uppercase text-accent mb-2">En ce moment</div>
     <ul class="text-sm text-soft space-y-1">
       <li>→ Préparation CompTIA Security+ (SY0-701)</li>
@@ -52,10 +53,56 @@ import Section from "../components/Section.astro";
     </div>
 
   </div>
-</Section>
+  </Section>
 
   <Section id="projets" number="03" title="Projets">
-    <p class="text-sm text-soft max-w-md leading-relaxed">Cartes projets à venir.</p>
+  <div slot="wide" class="grid gap-4 md:grid-cols-2">
+
+    <ProjectCard title="syial.dev" stack="Astro · Tailwind · Cloudflare" link="https://github.com/Syial/syial-dev" status="vous êtes ici">
+      <p>
+        Le site sur lequel vous êtes. Au-delà de la vitrine, c'est un premier terrain d'application concret : pipeline de déploiement automatisé, configuration DNS et certificats, durcissement TLS audité puis corrigé.
+      </p>
+      <p class="text-xs text-muted">
+        Retenu : ce qui se passe réellement entre un navigateur et un site : DNS, certificats, redirections, en-têtes. Le configurer soi-même apprend plus que n'importe quel cours.
+      </p>
+    </ProjectCard>
+
+    <ProjectCard title="SCP:CB Helper" stack="C++ · ImGui · DirectX 11" status="v2 en préparation">
+      <p>
+        Overlay in-game pour SCP: Containment Breach : fiches des entités, astuces, salles et objets, recherche, favoris, historique. La v2 combinera les données du wiki avec des notes plus avancées.
+      </p>
+      <p class="text-xs text-muted">
+        Retenu : structurer un vrai projet C++ : séparer les responsabilités en modules, gérer un cache de ressources, et faire cohabiter mon code avec un jeu qui n'a jamais été conçu pour accueillir un overlay.
+      </p>
+    </ProjectCard>
+
+    <ProjectCard title="Ambiance - Sound Menu" stack="Lua · Garry's Mod" status="sortie prochaine">
+      <p>
+        Menu de sons pour serveurs Garry's Mod : sons émis depuis un joueur, un point fixe ou un objet, portée et atténuation configurables, playlists avec lecture aléatoire, et gestion des sons actifs en temps réel. Permissions par groupe de joueurs.
+      </p>
+      <p class="text-xs text-muted">
+        Retenu : construire une interface moderne sous les contraintes d'un moteur vieillissant. Trouver l'équilibre entre performances et confort d'utilisation s'est révélé plus difficile que de coder les fonctionnalités elles-mêmes.
+      </p>
+    </ProjectCard>
+
+    <ProjectCard title="Ascend - Leveling System" stack="Lua · Garry's Mod" status="en cours">
+      <p>
+        Système de progression pour serveurs Garry's Mod : sources d'XP configurables (connexion, kills, temps de jeu, argent selon le gamemode), niveaux, prestige, et permissions fines par action. Conçu pour être étendu par les utilisateurs via une API.
+      </p>
+      <p class="text-xs text-muted">
+        Retenu : concevoir un addon destiné à être modifié par d'autres. Exposer une API propre oblige à anticiper des usages qu'on ne contrôle pas, et ça change complètement la façon d'écrire son code.
+      </p>
+    </ProjectCard>
+
+    <article class="border border-dashed border-accent bg-card p-5 flex flex-col gap-3">
+      <h3 class="text-sm font-medium text-accent">À venir</h3>
+      <p class="text-sm text-soft leading-relaxed">
+        Un honeypot SSH avec analyse des tentatives d'intrusion, puis un
+        visualiseur de trafic réseau en temps réel. Write-ups pour expliquer en détail les processus et les résultats.
+      </p>
+    </article>
+
+  </div>
   </Section>
 
   <Section id="writeups" number="04" title="Write-ups">

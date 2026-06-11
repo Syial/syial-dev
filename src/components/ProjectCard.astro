@@ -1,0 +1,21 @@
+---
+const { title, stack, link, status } = Astro.props;
+---
+
+<article class="border border-line bg-card p-5 flex flex-col gap-3">
+  <div class="flex items-baseline justify-between gap-4">
+    <h3 class="text-sm font-medium">{title}</h3>
+    {link && (
+      <a href={link} target="_blank" rel="noopener" class="text-xs text-muted underline hover:text-ink whitespace-nowrap">
+        GitHub ↗
+      </a>
+    )}
+  </div>
+  <div class="flex items-center gap-3 text-xs text-muted">
+    <span>{stack}</span>
+    {status && <span class="text-accent">· {status}</span>}
+  </div>
+  <div class="text-sm text-soft leading-relaxed space-y-2">
+    <slot />
+  </div>
+</article>

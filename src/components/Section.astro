@@ -15,4 +15,9 @@ const { id, number, title } = Astro.props;
   <div>
     <slot />
   </div>
+  {Astro.slots.has("wide") && (
+    <div class="md:col-span-2">
+      <slot name="wide" />
+    </div>
+  )}
 </section>
