@@ -1,0 +1,28 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  project: CollectionEntry<"projets">;
+}
+
+const { project } = Astro.props;
+const { title, description, tags, repoUrl } = project.data;
+---
+
+<li class="relative pl-4 mb-4 text-[15px] leading-relaxed text-ink-muted">
+  <span class="absolute left-0 top-[9px] w-[5px] h-[5px] bg-ink-faint"></span>
+  <b class="text-ink font-semibold">{title} :</b> {description}
+  {repoUrl && (
+    <>
+      {" "}
+      <a href={repoUrl} class="text-accent font-medium">Voir le code</a>
+    </>
+  )}
+  {tags.length > 0 && (
+    <div class="mt-1.5 flex flex-wrap gap-1.5">
+      {tags.map((tag) => (
+        <span class="text-xs text-ink-faint border border-line rounded px-1.5 py-0.5">{tag}</span>
+      ))}
+    </div>
+  )}
+</li>

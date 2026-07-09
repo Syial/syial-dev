@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Fraunces", serif;
+
+  --color-bg: #f6f2ea;
+  --color-ink: #2b2620;
+  --color-ink-muted: #6e6558;
+  --color-ink-faint: #948b7b;
+  --color-accent: #4c6e8c;
+  --color-line: #e3dbc9;
+}

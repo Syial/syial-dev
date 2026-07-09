@@ -1,0 +1,60 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Sidebar from "../../components/Sidebar.astro";
+import { getCollection, render, type CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+  const writeups = await getCollection("writeups", ({ data }) => !data.draft);
+  return writeups.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<"writeups">;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, date, summary, tags, project, externalUrl } = entry.data;
+const formattedDate = date.toLocaleDateString("fr-FR", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+---
+
+<Layout title={`${title} — Syial`}>
+  <main class="max-w-3xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-[200px_1fr] gap-10">
+    <Sidebar />
+
+    <article>
+      <h1 class="font-serif text-2xl font-semibold mb-2 leading-snug">{title}</h1>
+      <p class="text-xs text-ink-muted mb-6">
+        {formattedDate}
+        {tags.length > 0 && ` · ${tags.join(", ")}`}
+        {project && (
+          <>
+            {" · "}
+            <a href="/#projets" class="text-accent font-medium">projet associé</a>
+          </>
+        )}
+        {externalUrl && (
+          <>
+            {" · "}
+            <a href={externalUrl} class="text-accent font-medium">lien externe</a>
+          </>
+        )}
+      </p>
+
+      <div class="border-l-2 border-accent bg-line/30 px-5 py-4 mb-8">
+        <p class="text-sm leading-relaxed text-ink-muted">{summary}</p>
+      </div>
+
+      <div class="font-serif text-[15px] leading-[1.75] text-ink-muted">
+        <Content />
+      </div>
+    </article>
+  </main>
+</Layout>

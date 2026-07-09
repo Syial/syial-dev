@@ -1,17 +1,40 @@
 ---
+import Layout from "../layouts/Layout.astro";
+import Sidebar from "../components/Sidebar.astro";
+import ProjectEntry from "../components/ProjectEntry.astro";
+import WriteupEntry from "../components/WriteupEntry.astro";
+import { getCollection } from "astro:content";
 
+const projets = (await getCollection("projets")).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const writeups = (await getCollection("writeups", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Syial">
+  <main class="max-w-3xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-[200px_1fr] gap-10">
+    <Sidebar />
+
+    <div>
+      <p class="text-sm text-ink-muted mb-2">En recherche d'un premier poste — cybersécurité défensive</p>
+      <h1 class="font-serif text-[28px] font-semibold mb-4 leading-snug">
+        Comprendre comment les systèmes cassent, pour mieux les défendre.
+      </h1>
+      <a href="mailto:contact@syial.dev" class="inline-block bg-ink text-bg text-sm font-medium px-4 py-2 rounded-md mb-10">
+        Me contacter
+      </a>
+
+      <h2 class="font-serif text-lg font-semibold mb-4">Projets</h2>
+      <ul class="list-none p-0 mb-10">
+        {projets.map((p) => <ProjectEntry project={p} />)}
+      </ul>
+
+      <h2 class="font-serif text-lg font-semibold mb-4">Writeups</h2>
+      <ul class="list-none p-0">
+        {writeups.map((w) => <WriteupEntry writeup={w} />)}
+      </ul>
+    </div>
+  </main>
+</Layout>
