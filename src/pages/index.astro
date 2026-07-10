@@ -14,24 +14,26 @@ const writeups = (await getCollection("writeups", ({ data }) => !data.draft)).so
 ---
 
 <Layout title="Syial">
-  <main class="max-w-3xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-[200px_1fr] gap-10">
+  <main class="max-w-5xl mx-auto px-6 py-24 grid grid-cols-1 md:grid-cols-[260px_1fr] gap-10">
     <Sidebar />
 
     <div>
-      <p class="text-sm text-ink-muted mb-2">En recherche d'un premier poste — cybersécurité défensive</p>
-      <h1 class="font-serif text-[28px] font-semibold mb-4 leading-snug">
-        Comprendre comment les systèmes cassent, pour mieux les défendre.
+      <h1 class="font-serif text-display font-semibold mb-4 leading-snug">
+        Portfolio
       </h1>
-      <a href="mailto:contact@syial.dev" class="inline-block bg-ink text-bg text-sm font-medium px-4 py-2 rounded-md mb-10">
+      <p class="text-body text-ink-muted mb-6">
+        Actuellement à la recherche d'un stage ou d'un premier poste en cybersécurité défensive.
+      </p>
+      <a href="mailto:contact@syial.dev" class="inline-block bg-ink text-bg text-sm font-medium px-4 py-2 rounded-md mb-16">
         Me contacter
       </a>
 
-      <h2 class="font-serif text-lg font-semibold mb-4">Projets</h2>
-      <ul class="list-none p-0 mb-10">
+      <h2 class="font-serif text-2xl font-semibold mb-4">Projets</h2>
+      <ul class="list-none p-0 mb-16">
         {projets.map((p) => <ProjectEntry project={p} />)}
       </ul>
 
-      <h2 class="font-serif text-lg font-semibold mb-4">Writeups</h2>
+      <h2 class="font-serif text-2xl font-semibold mb-4">Writeups</h2>
       <ul class="list-none p-0">
         {writeups.map((w) => <WriteupEntry writeup={w} />)}
       </ul>

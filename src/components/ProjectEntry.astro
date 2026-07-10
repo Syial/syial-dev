@@ -9,7 +9,7 @@ const { project } = Astro.props;
 const { title, description, tags, repoUrl } = project.data;
 ---
 
-<li class="relative pl-4 mb-4 text-[15px] leading-relaxed text-ink-muted">
+<li class="relative pl-4 mb-4 text-body leading-relaxed text-ink-muted">
   <span class="absolute left-0 top-[9px] w-[5px] h-[5px] bg-ink-faint"></span>
   <b class="text-ink font-semibold">{title} :</b> {description}
   {repoUrl && (
