@@ -8,6 +8,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "build:cf": "bash scripts/fetch-content.sh && astro build",
+    "sync-content": "bash scripts/fetch-content.sh",
     "preview": "astro preview",
     "astro": "astro"
   },

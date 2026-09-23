@@ -1,27 +1,26 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { formatDate } from "../lib/format";
 
 interface Props {
   writeup: CollectionEntry<"writeups">;
 }
 
 const { writeup } = Astro.props;
-const { title, date, summary, tags } = writeup.data;
-const formattedDate = date.toLocaleDateString("fr-FR", {
-  day: "numeric",
-  month: "long",
-  year: "numeric",
-});
+const { title, date } = writeup.data;
 ---
 
-<li class="relative pl-4 mb-5 text-body leading-relaxed text-ink-muted">
-  <span class="absolute left-0 top-[9px] w-[5px] h-[5px] bg-ink-faint"></span>
-  <a href={`/writeups/${writeup.id}`} class="text-ink font-semibold hover:text-accent">
-    {title}
+<li class="list-entry">
+  <a
+    href={`/writeups/${writeup.id}`}
+    class="flex items-baseline justify-between gap-lg hover:underline underline-offset-2"
+  >
+    <span class="type-body text-ink">{title}</span>
+    <time
+      datetime={date.toISOString()}
+      class="type-meta text-ink-faint shrink-0"
+    >
+      {formatDate(date, "short")}
+    </time>
   </a>
-  <span class="text-xs text-ink-faint block mt-0.5">
-    {formattedDate}
-    {tags.length > 0 && ` · ${tags.join(", ")}`}
-  </span>
-  <p class="mt-1">{summary}</p>
 </li>

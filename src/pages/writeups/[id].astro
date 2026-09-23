@@ -1,7 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import Sidebar from "../../components/Sidebar.astro";
+import BackLink from "../../components/BackLink.astro";
 import { getCollection, render, type CollectionEntry } from "astro:content";
+import { formatDate } from "../../lib/format";
 
 export async function getStaticPaths() {
   const writeups = await getCollection("writeups", ({ data }) => !data.draft);
@@ -18,43 +19,42 @@ interface Props {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const { title, date, summary, tags, project, externalUrl } = entry.data;
-const formattedDate = date.toLocaleDateString("fr-FR", {
-  day: "numeric",
-  month: "long",
-  year: "numeric",
-});
 ---
 
-<Layout title={`${title} — Syial`} description={summary}>
-  <main class="max-w-3xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-[200px_1fr] gap-10">
-    <Sidebar />
+<Layout title={`Syial // ${title}`} description={summary}>
+  <BackLink />
 
-    <article>
-      <h1 class="font-serif text-2xl font-semibold mb-2 leading-snug">{title}</h1>
-      <p class="text-xs text-ink-muted mb-6">
-        {formattedDate}
-        {tags.length > 0 && ` · ${tags.join(", ")}`}
-        {project && (
-          <>
-            {" · "}
-            <a href="/#projets" class="text-accent font-medium">projet associé</a>
-          </>
-        )}
-        {externalUrl && (
-          <>
-            {" · "}
-            <a href={externalUrl} class="text-accent font-medium">lien externe</a>
-          </>
-        )}
-      </p>
+  <article>
+    <h1 class="page-title type-title">{title}</h1>
+    <p class="page-meta type-meta text-ink-faint">
+      {formatDate(date, "long")}
+      {tags.length > 0 && ` · ${tags.join(" · ")}`}
+      {project && (
+        <>
+          {" · "}
+          <a href={`/projets/${project}`} class="hover:underline underline-offset-2">Projet associé</a>
+        </>
+      )}
+      {externalUrl && (
+        <>
+          {" · "}
+          <a
+            href={externalUrl}
+            class="hover:underline underline-offset-2"
+          >
+            Lien externe
+          </a>
+        </>
+      )}
+    </p>
 
-      <div class="border-l-2 border-accent bg-line/30 px-5 py-4 mb-8">
-        <p class="text-sm leading-relaxed text-ink-muted">{summary}</p>
-      </div>
+    <div class="callout">
+      <p class="section-label mb-sm">Résumé</p>
+      <p class="type-body">{summary}</p>
+    </div>
 
-      <div class="font-serif text-[15px] leading-[1.75] text-ink-muted">
-        <Content />
-      </div>
-    </article>
-  </main>
+    <div class="prose text-ink-soft">
+      <Content />
+    </div>
+  </article>
 </Layout>

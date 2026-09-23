@@ -1,0 +1,44 @@
+---
+interface Props {
+  liveUrl?: string;
+  repoUrl?: string;
+  detailsHref?: string;
+  class?: string;
+}
+
+const { liveUrl, repoUrl, detailsHref, class: className = "mt-sm flex flex-wrap gap-x-lg gap-y-xs" } = Astro.props;
+const liveIsExternal = Boolean(liveUrl && /^https?:\/\//i.test(liveUrl));
+---
+
+{
+  (detailsHref || liveUrl || repoUrl) && (
+    <p class={className}>
+      {detailsHref && (
+        <a
+          href={detailsHref}
+          class="type-ui text-ink hover:underline underline-offset-2"
+        >
+          Détails
+        </a>
+      )}
+      {liveUrl && (
+        <a
+          href={liveUrl}
+          target={liveIsExternal ? "_blank" : undefined}
+          rel={liveIsExternal ? "noopener noreferrer" : undefined}
+          class="type-ui text-ink hover:underline underline-offset-2"
+        >
+          Essayer <span class="font-sans" aria-hidden="true">↗</span>
+        </a>
+      )}
+      {repoUrl && (
+        <a
+          href={repoUrl}
+          class="type-ui text-ink hover:underline underline-offset-2"
+        >
+          Voir le code <span class="font-sans" aria-hidden="true">↗</span>
+        </a>
+      )}
+    </p>
+  )
+}

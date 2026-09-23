@@ -1,28 +1,36 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import ProjectLinks from "./ProjectLinks.astro";
 
 interface Props {
   project: CollectionEntry<"projets">;
 }
 
 const { project } = Astro.props;
-const { title, description, tags, repoUrl } = project.data;
+const { title, description, tags, repoUrl, liveUrl } = project.data;
+
+const repo = repoUrl
+  ? new URL(repoUrl).pathname.split("/").filter(Boolean).at(-1)
+  : undefined;
+const heading = repo ? `${title} // ${repo}` : title;
+const hasDetails = Boolean(project.body?.trim());
 ---
 
-<li class="relative pl-4 mb-4 text-body leading-relaxed text-ink-muted">
-  <span class="absolute left-0 top-[9px] w-[5px] h-[5px] bg-ink-faint"></span>
-  <b class="text-ink font-semibold">{title} :</b> {description}
-  {repoUrl && (
-    <>
-      {" "}
-      <a href={repoUrl} class="text-accent font-medium">Voir le code</a>
-    </>
-  )}
-  {tags.length > 0 && (
-    <div class="mt-1.5 flex flex-wrap gap-1.5">
-      {tags.map((tag) => (
-        <span class="text-xs text-ink-faint border border-line rounded px-1.5 py-0.5">{tag}</span>
-      ))}
-    </div>
-  )}
+<li class="list-entry">
+  <div class="sm:flex sm:items-baseline sm:justify-between sm:gap-lg mb-xs">
+    <h3 class="type-body font-medium text-ink min-w-0">
+      {heading}
+    </h3>
+    {tags.length > 0 && (
+      <p class="type-meta text-ink-faint mt-sm sm:mt-0 sm:text-right sm:max-w-[18rem]">
+        {tags.join(" · ")}
+      </p>
+    )}
+  </div>
+  <p class="type-ui text-ink-soft font-normal">{description}</p>
+  <ProjectLinks
+    liveUrl={liveUrl}
+    repoUrl={repoUrl}
+    detailsHref={hasDetails ? `/projets/${project.id}` : undefined}
+  />
 </li>

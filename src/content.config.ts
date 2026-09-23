@@ -8,6 +8,7 @@ const projets = defineCollection({
     description: z.string(),
     tags: z.array(z.string()).default([]),
     repoUrl: z.string().url().optional(),
+    liveUrl: z.string().optional(),
     order: z.number().default(0),
   }),
 });

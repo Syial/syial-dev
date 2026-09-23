@@ -1,0 +1,76 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import BackLink from "../../components/BackLink.astro";
+import ProjectLinks from "../../components/ProjectLinks.astro";
+import { getCollection, render, type CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+  const projets = await getCollection("projets");
+  return projets
+    .filter((entry) => Boolean(entry.body?.trim()))
+    .map((entry) => ({
+      params: { id: entry.id },
+      props: { entry },
+    }));
+}
+
+interface Props {
+  entry: CollectionEntry<"projets">;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, description, tags, repoUrl, liveUrl } = entry.data;
+
+const writeups = (await getCollection("writeups", ({ data }) => !data.draft)).filter(
+  (w) => w.data.project === entry.id
+);
+---
+
+<Layout title={`Syial // ${title}`} description={description}>
+  <BackLink />
+
+  <article>
+    <h1 class="page-title type-title">
+      {title} // {entry.id}
+    </h1>
+    {tags.length > 0 && (
+      <p
+        class:list={[
+          "type-meta text-ink-faint",
+          liveUrl || repoUrl ? "mb-lg" : "page-meta",
+        ]}
+      >
+        {tags.join(" · ")}
+      </p>
+    )}
+
+    <ProjectLinks
+      liveUrl={liveUrl}
+      repoUrl={repoUrl}
+      class="page-meta flex flex-wrap gap-x-lg gap-y-xs"
+    />
+
+    <div class="prose text-ink-soft">
+      <Content />
+    </div>
+
+    {writeups.length > 0 && (
+      <section class="rule-before">
+        <h2 class="section-label mb-md">Writeups</h2>
+        <ul class="list-none p-0 space-y-sm">
+          {writeups.map((w) => (
+            <li>
+              <a
+                href={`/writeups/${w.id}`}
+                class="type-ui text-ink hover:underline underline-offset-2"
+              >
+                {w.data.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </article>
+</Layout>

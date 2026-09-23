@@ -2,12 +2,11 @@
 
 Portfolio personnel — [syial.dev](https://syial.dev)
 
-Site statique, Astro 6 + Tailwind CSS v4.
+Site statique, Astro 7 + Tailwind CSS v4.
 
 ## Contenu
 
-- Les projets et writeups sont des fichiers Markdown dans `src/content/`.
-- Ajouter un fichier dans `src/content/projets/` ou `src/content/writeups/` suffit à faire apparaître une nouvelle entrée sur le site.
+Projets et writeups vivent dans un **repo GitHub privé**.
 
 ## Déploiement
 

@@ -1,6 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Sidebar from "../components/Sidebar.astro";
 import ProjectEntry from "../components/ProjectEntry.astro";
 import WriteupEntry from "../components/WriteupEntry.astro";
 import { getCollection } from "astro:content";
@@ -14,29 +13,59 @@ const writeups = (await getCollection("writeups", ({ data }) => !data.draft)).so
 ---
 
 <Layout title="Syial">
-  <main class="max-w-5xl mx-auto px-6 py-24 grid grid-cols-1 md:grid-cols-[260px_1fr] gap-10">
-    <Sidebar />
-
-    <div>
-      <h1 class="font-serif text-display font-semibold mb-4 leading-snug">
-        Portfolio
-      </h1>
-      <p class="text-body text-ink-muted mb-6">
-        Actuellement à la recherche d'un stage ou d'un premier poste en cybersécurité défensive.
+  <header class="rule-after flex items-center gap-lg sm:gap-xl">
+    <img
+      src="/pfp.jpg"
+      alt=""
+      width="72"
+      height="72"
+      class="avatar"
+    />
+    <div class="min-w-0">
+      <h1 class="type-display">Syial</h1>
+      <p class="type-meta text-ink-faint mt-sm">
+        Reverse Engineering · Systèmes · Cybersécurité
       </p>
-      <a href="mailto:contact@syial.dev" class="inline-block bg-ink text-bg text-sm font-medium px-4 py-2 rounded-md mb-16">
-        Me contacter
-      </a>
+    </div>
+  </header>
 
-      <h2 class="font-serif text-2xl font-semibold mb-4">Projets</h2>
-      <ul class="list-none p-0 mb-16">
+  <div class="stack type-body text-ink-soft">
+    <p>
+      Ce qui m'intéresse depuis toujours, c'est comprendre comment les choses
+      fonctionnent réellement, pas seulement m'en servir. Il y a quelques années,
+      ça s'est traduit par le montage de ma propre configuration ; aujourd'hui,
+      c'est surtout par la rétro-ingénierie.
+    </p>
+    <p>
+      Cette façon de voir les choses mène naturellement à la cybersécurité
+      défensive : un domaine où on apprend en continu, et où cette compréhension
+      sert à protéger plutôt qu'à exploiter. Je m'y prépare activement, en
+      construisant d'abord une base solide côté support IT, en parallèle de mes
+      propres projets techniques.
+    </p>
+  </div>
+
+  <p class="mt-xl type-meta text-ink">
+    Google Cybersecurity Certificate <span class="font-sans type-body leading-none">✓</span>
+    <span class="text-ink-faint mx-md">·</span>
+    En préparation : ITIL 5 et A+
+  </p>
+
+  {projets.length > 0 && (
+    <section class="section" id="projets">
+      <h2 class="section-label mb-xs">Projets</h2>
+      <ul class="list-none p-0">
         {projets.map((p) => <ProjectEntry project={p} />)}
       </ul>
+    </section>
+  )}
 
-      <h2 class="font-serif text-2xl font-semibold mb-4">Writeups</h2>
+  {writeups.length > 0 && (
+    <section class="section" id="writeups">
+      <h2 class="section-label mb-xs">Writeups</h2>
       <ul class="list-none p-0">
         {writeups.map((w) => <WriteupEntry writeup={w} />)}
       </ul>
-    </div>
-  </main>
+    </section>
+  )}
 </Layout>
