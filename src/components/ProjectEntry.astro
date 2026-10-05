@@ -7,30 +7,41 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, description, tags, repoUrl, liveUrl } = project.data;
+const { title, description, tags, repoUrl, liveUrl, thumb } = project.data;
 
-const repo = repoUrl
-  ? new URL(repoUrl).pathname.split("/").filter(Boolean).at(-1)
-  : undefined;
-const heading = repo ? `${title} // ${repo}` : title;
 const hasDetails = Boolean(project.body?.trim());
 ---
 
-<li class="list-entry">
-  <div class="sm:flex sm:items-baseline sm:justify-between sm:gap-lg mb-xs">
-    <h3 class="type-body font-medium text-ink min-w-0">
-      {heading}
-    </h3>
-    {tags.length > 0 && (
-      <p class="type-meta text-ink-faint mt-sm sm:mt-0 sm:text-right sm:max-w-[18rem]">
-        {tags.join(" · ")}
-      </p>
+<li class="project-card">
+  <div class:list={["project-card-row", thumb && "has-thumb"]}>
+    {thumb && (
+      <img
+        src={thumb}
+        alt=""
+        class="project-thumb"
+        loading="lazy"
+        width="140"
+        height="140"
+      />
     )}
+    <div class="project-card-body">
+      {tags.length > 0 && (
+        <p class="type-meta text-ink-faint">
+          {tags.join(" · ")}
+        </p>
+      )}
+      <h3 class="type-entry">
+        {title}
+      </h3>
+      <p class="type-ui text-ink-soft font-normal">
+        {description}
+      </p>
+      <ProjectLinks
+        liveUrl={liveUrl}
+        repoUrl={repoUrl}
+        detailsHref={hasDetails ? `/projets/${project.id}` : undefined}
+        class="flex flex-wrap gap-x-lg gap-y-xs"
+      />
+    </div>
   </div>
-  <p class="type-ui text-ink-soft font-normal">{description}</p>
-  <ProjectLinks
-    liveUrl={liveUrl}
-    repoUrl={repoUrl}
-    detailsHref={hasDetails ? `/projets/${project.id}` : undefined}
-  />
 </li>

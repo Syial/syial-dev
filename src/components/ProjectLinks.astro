@@ -7,7 +7,6 @@ interface Props {
 }
 
 const { liveUrl, repoUrl, detailsHref, class: className = "mt-sm flex flex-wrap gap-x-lg gap-y-xs" } = Astro.props;
-const liveIsExternal = Boolean(liveUrl && /^https?:\/\//i.test(liveUrl));
 ---
 
 {
@@ -24,8 +23,6 @@ const liveIsExternal = Boolean(liveUrl && /^https?:\/\//i.test(liveUrl));
       {liveUrl && (
         <a
           href={liveUrl}
-          target={liveIsExternal ? "_blank" : undefined}
-          rel={liveIsExternal ? "noopener noreferrer" : undefined}
           class="type-ui text-ink hover:underline underline-offset-2"
         >
           Essayer <span class="font-sans" aria-hidden="true">↗</span>

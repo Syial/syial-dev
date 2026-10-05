@@ -25,4 +25,5 @@ pnpm-debug.log*
 # content
 src/content/projets/*
 src/content/writeups/*
+public/images/projets/*
 public/images/writeups/*

@@ -9,6 +9,7 @@ const projets = defineCollection({
     tags: z.array(z.string()).default([]),
     repoUrl: z.string().url().optional(),
     liveUrl: z.string().optional(),
+    thumb: z.string().optional(),
     order: z.number().default(0),
   }),
 });
@@ -18,6 +19,7 @@ const writeups = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
+    accroche: z.string(),
     summary: z.string(),
     tags: z.array(z.string()).default([]),
     project: z.string().optional(),

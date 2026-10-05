@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import SectionRule from "../components/SectionRule.astro";
 import ProjectEntry from "../components/ProjectEntry.astro";
 import WriteupEntry from "../components/WriteupEntry.astro";
 import { getCollection } from "astro:content";
@@ -13,7 +14,7 @@ const writeups = (await getCollection("writeups", ({ data }) => !data.draft)).so
 ---
 
 <Layout title="Syial">
-  <header class="rule-after flex items-center gap-lg sm:gap-xl">
+  <header class="flex items-center gap-lg sm:gap-xl">
     <img
       src="/pfp.jpg"
       alt=""
@@ -24,10 +25,12 @@ const writeups = (await getCollection("writeups", ({ data }) => !data.draft)).so
     <div class="min-w-0">
       <h1 class="type-display">Syial</h1>
       <p class="type-meta text-ink-faint mt-sm">
-        Reverse Engineering · Systèmes · Cybersécurité
+        Cybersécurité · Systèmes · Reverse Engineering
       </p>
     </div>
   </header>
+
+  <SectionRule label="À propos" />
 
   <div class="stack type-body text-ink-soft">
     <p>
@@ -45,25 +48,25 @@ const writeups = (await getCollection("writeups", ({ data }) => !data.draft)).so
     </p>
   </div>
 
-  <p class="mt-xl type-meta text-ink">
-    Google Cybersecurity Certificate <span class="font-sans type-body leading-none">✓</span>
-    <span class="text-ink-faint mx-md">·</span>
-    En préparation : ITIL 5 et A+
+  <p class="mt-xl type-meta font-normal text-ink-faint">
+    Google Cybersecurity Certificate <span class="font-sans leading-none">✓</span>
+    <span class="mx-md">·</span>
+    En préparation : Security+ et SEC1
   </p>
 
   {projets.length > 0 && (
-    <section class="section" id="projets">
-      <h2 class="section-label mb-xs">Projets</h2>
-      <ul class="list-none p-0">
+    <section id="projets">
+      <SectionRule label="Projets" />
+      <ul class="project-list">
         {projets.map((p) => <ProjectEntry project={p} />)}
       </ul>
     </section>
   )}
 
   {writeups.length > 0 && (
-    <section class="section" id="writeups">
-      <h2 class="section-label mb-xs">Writeups</h2>
-      <ul class="list-none p-0">
+    <section id="writeups">
+      <SectionRule label="Writeups" />
+      <ul class="writeup-list">
         {writeups.map((w) => <WriteupEntry writeup={w} />)}
       </ul>
     </section>

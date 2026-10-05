@@ -18,10 +18,10 @@ interface Props {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const { title, date, summary, tags, project, externalUrl } = entry.data;
+const { title, date, accroche, summary, tags, project, externalUrl } = entry.data;
 ---
 
-<Layout title={`Syial // ${title}`} description={summary}>
+<Layout title={`Syial // ${title}`} description={accroche}>
   <BackLink />
 
   <article>

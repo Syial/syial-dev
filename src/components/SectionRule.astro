@@ -1,0 +1,14 @@
+---
+interface Props {
+  label: string;
+  as?: "h2" | "p" | "div";
+  class?: string;
+}
+
+const { label, as: Tag = "h2", class: className } = Astro.props;
+---
+
+<div class:list={["section-rule", className]}>
+  <Tag class="section-label">{label}</Tag>
+  <span class="section-rule-line" aria-hidden="true"></span>
+</div>

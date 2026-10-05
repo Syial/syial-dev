@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import SectionRule from "../components/SectionRule.astro";
 
 interface Props {
   title: string;
@@ -8,7 +9,7 @@ interface Props {
 
 const {
   title,
-  description = "Portfolio de Syial — reverse engineering, systèmes et cybersécurité. Projets techniques et writeups.",
+  description = "Portfolio de Syial - reverse engineering, systèmes et cybersécurité. Projets techniques et writeups.",
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -41,13 +42,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       <main>
         <slot />
       </main>
+      <SectionRule label="Contact" />
       <footer
         class="footer-bar flex flex-wrap items-baseline justify-between gap-x-xl gap-y-sm type-meta text-ink-faint"
       >
         <div class="flex flex-wrap gap-x-lg">
-          <a href="https://github.com/Syial" class="hover:underline underline-offset-2">GitHub</a>
-          <a href="https://tryhackme.com/p/Syial" class="hover:underline underline-offset-2">TryHackMe</a>
-          <a href="https://www.root-me.org/Syial" class="hover:underline underline-offset-2">Root-Me</a>
+          <a href="mailto:contact@syial.dev" class="hover:underline underline-offset-2">Mail</a>
           <a
             href="https://discord.com/users/1461434699237818392"
             class="hover:underline underline-offset-2"
@@ -56,9 +56,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             Discord
           </a>
         </div>
-        <a href="mailto:contact@syial.dev" class="hover:underline underline-offset-2">
-          contact@syial.dev
-        </a>
+        <div class="flex flex-wrap gap-x-lg">
+          <a href="https://github.com/Syial" class="hover:underline underline-offset-2">GitHub</a>
+          <a href="https://tryhackme.com/p/Syial" class="hover:underline underline-offset-2">TryHackMe</a>
+          <a href="https://www.root-me.org/Syial" class="hover:underline underline-offset-2">Root-Me</a>
+        </div>
       </footer>
     </div>
     <script is:inline>

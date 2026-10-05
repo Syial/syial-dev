@@ -7,18 +7,25 @@ interface Props {
 }
 
 const { writeup } = Astro.props;
-const { title, date } = writeup.data;
+const { title, date, accroche, tags } = writeup.data;
 ---
 
-<li class="list-entry">
-  <a
-    href={`/writeups/${writeup.id}`}
-    class="flex items-baseline justify-between gap-lg hover:underline underline-offset-2"
-  >
-    <span class="type-body text-ink">{title}</span>
+<li class="writeup-card">
+  <a href={`/writeups/${writeup.id}`} class="writeup-card-link">
+    {tags.length > 0 && (
+      <p class="type-meta text-ink-faint">
+        {tags.join(" · ")}
+      </p>
+    )}
+    <h3 class="type-entry">
+      {title}
+    </h3>
+    <p class="type-ui text-ink-soft font-normal">
+      {accroche}
+    </p>
     <time
       datetime={date.toISOString()}
-      class="type-meta text-ink-faint shrink-0"
+      class="type-meta text-ink-faint writeup-card-date"
     >
       {formatDate(date, "short")}
     </time>
